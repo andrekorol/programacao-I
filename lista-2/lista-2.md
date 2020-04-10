@@ -26,7 +26,7 @@ int main()
 
 #### 2)
 <p align="center">
-   <img src="/home/andre/src/repos/github/programacao-I/lista-2/ex2-flowchart.png">
+   <img src="ex2-flowchart.png">
 </p>
 
 ```C
