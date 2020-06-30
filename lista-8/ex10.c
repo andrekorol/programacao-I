@@ -2,6 +2,8 @@
 #include <math.h>
 #include <complex.h>
 
+#define E 2.71828
+
 int main()
 {
     char inflexao = 0;
@@ -11,7 +13,7 @@ int main()
     puts("Os valores (pontos) da funcao sao:");
     for (int x = -10; x <= 10; x++)
     {
-        z = cpow(x, M_E);
+        z = cpow(x, E);
         y = cabs(z);
         if (creal(z) < 0)
             y *= -1;
