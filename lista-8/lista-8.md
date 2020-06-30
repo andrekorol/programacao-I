@@ -142,13 +142,25 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 6)
 
-```C
-// TODO
-```
+**a)** O modelo matemático usado para encontrar o resultado do gráfico é o do logaritmo
+natural log(x).
 
-<div style="page-break-after: always;"></div>
+```C
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    for (double x = 0; x <= 10; x += 0.5)
+        printf("log(%.1f) = %lf\n", x, log(x));
+
+    return 0;
+}
+```
 
 #### 7)
 
@@ -174,6 +186,8 @@ int main()
     return 0;
 }
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### 8)
 
@@ -217,6 +231,8 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 10)
 
 **a)** A funcao é f(x) = x^e.
@@ -228,6 +244,8 @@ int main()
 #include <math.h>
 #include <complex.h>
 
+#define E 2.71828
+
 int main()
 {
     char inflexao = 0;
@@ -237,7 +255,7 @@ int main()
     puts("Os valores (pontos) da funcao sao:");
     for (int x = -10; x <= 10; x++)
     {
-        z = cpow(x, M_E);
+        z = cpow(x, E);
         y = cabs(z);
         if (creal(z) < 0)
             y *= -1;
