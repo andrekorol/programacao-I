@@ -14,6 +14,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
+
+#define NUM_MAX_PESSOAS 20
 
 typedef struct Data
 {
@@ -37,6 +40,14 @@ typedef struct Total_Sexo
     float percentualMasculino;
     float percentualFeminino;
 } Total_Sexo;
+
+typedef struct SexoMaiorIdade
+{
+    int homens;
+    int mulheres;
+    int indicesHomens[NUM_MAX_PESSOAS];
+    int indicesMulheres[NUM_MAX_PESSOAS];
+} SexoMaiorIdade;
 
 // Verifica se eh fevereiro de um ano bissexto
 int fevAnoBissexto(int ano, int mes)
@@ -144,6 +155,44 @@ Total_Sexo calculo_sexo(Pessoa pessoas[], int n)
     return Total_Sexo;
 }
 
+SexoMaiorIdade calculo_maior_idade(Pessoa pessoas[], int n)
+{
+    int i;
+    int homens = 0;
+    int mulheres = 0;
+    int indicesHomens[n];
+    int indicesMulheres[n];
+
+    // Inicializa os vetores dos indices com o valor de -1 (indice invalido)
+    for (i = 0; i < n; i++)
+    {
+        indicesHomens[i] = -1;
+        indicesMulheres[i] = -1;
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        if (toupper(pessoas[i].sexo[0]) == 'M' && pessoas[i].idade >= 25)
+        {
+            indicesHomens[homens] = i;
+            homens++;
+        }
+        else if (toupper(pessoas[i].sexo[0]) == 'F' && pessoas[i].idade >= 18)
+        {
+            indicesMulheres[mulheres] = i;
+            mulheres++;
+        }
+    }
+
+    SexoMaiorIdade pessoasFiltradas;
+    pessoasFiltradas.homens = homens;
+    pessoasFiltradas.mulheres = mulheres;
+    memcpy(pessoasFiltradas.indicesHomens, indicesHomens, sizeof(indicesHomens));
+    memcpy(pessoasFiltradas.indicesMulheres, indicesMulheres, sizeof(indicesMulheres));
+
+    return pessoasFiltradas;
+}
+
 char *Mes_Extenso(int extenso)
 {
     char *mes[12] = {"Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
@@ -167,6 +216,7 @@ void Imprimir_Pessoas(Pessoa pessoas[], int n)
 
 int main()
 {
+    int i;
     char numero[10];
     printf("Entre a quantidade (n) de pessoas: ");
     gets(numero);
@@ -174,7 +224,7 @@ int main()
 
     Pessoa pessoas[n];
 
-    for (int i = 0; i < n; i++)
+    for (i = 0; i < n; i++)
     {
         printf("\nDigite o nome: ");
         gets(pessoas[i].nome);
@@ -203,6 +253,23 @@ int main()
 
     printf("Porcentagem  Masculina: %.2f \n", Total_Sexo.percentualMasculino);
     printf("Porcentagem  Feminina:  %.2f \n", Total_Sexo.percentualFeminino);
+    printf("#################################\n");
+
+    SexoMaiorIdade pessoasFiltradas = calculo_maior_idade(pessoas, n);
+    for (i = 0; i < pessoasFiltradas.homens; i++)
+    {
+        if (i == 0)
+            puts("Pessoas do sexo masculino com idade >= 25:");
+        printf("%s - %d anos\n", pessoas[pessoasFiltradas.indicesHomens[i]].nome,
+               pessoas[pessoasFiltradas.indicesHomens[i]].idade);
+    }
+    for (i = 0; i < pessoasFiltradas.mulheres; i++)
+    {
+        if (i == 0)
+            puts("Pessoas do sexo feminino com idade >= 18:");
+        printf("%s - %d anos\n", pessoas[pessoasFiltradas.indicesMulheres[i]].nome,
+               pessoas[pessoasFiltradas.indicesMulheres[i]].idade);
+    }
 
     return 0;
 }
