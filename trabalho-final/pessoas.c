@@ -107,7 +107,7 @@ int Inteiro_String(char texto[], int numero_Maximo)
 {
     printf(texto);
     char Caractere[numero_Maximo];
-    fgets(Caractere, numero_Maximo, stdin);
+    gets(Caractere);
 
     return atoi(Caractere);
 }
@@ -149,7 +149,7 @@ void Imprimir_Pessoas(Pessoa pessoas[], int n)
         printf("Nome: %s\n", pessoas[i].nome);
         printf("Sexo: %s\n", pessoas[i].sexo);
         printf("Data de Nascimento: %d/%d/%d\n", pessoas[i].Data_Nascimento.dia, pessoas[i].Data_Nascimento.mes, pessoas[i].Data_Nascimento.ano);
-        printf("Idade: %d ", pessoas[i].idade);
+        printf("Idade: %d\n", pessoas[i].idade);
         char *prt = Mes_Extenso(pessoas[i].Data_Nascimento.mes);
         printf("Mes de Nascimento: %s\n", prt);
         printf("#################################\n");
@@ -160,7 +160,7 @@ int main()
 {
     char numero[10];
     printf("Entre a quantidade (n) de pessoas: ");
-    fgets(numero, 10, stdin);
+    gets(numero);
     int n = atoi(numero);
 
     Pessoa pessoas[n];
@@ -168,10 +168,10 @@ int main()
     for (int i = 0; i < n; i++)
     {
         printf("\nDigite o nome: ");
-        fgets(pessoas[i].nome, 45, stdin);
+        gets(pessoas[i].nome);
 
         printf("Digite o sexo (M - para masculino e F - para feminino): ");
-        fgets(pessoas[i].sexo, 1, stdin);
+        gets(pessoas[i].sexo);
 
         printf("Digite a data de nascimento\n");
         pessoas[i].Data_Nascimento.dia = Inteiro_String("Dia: ", 2);
