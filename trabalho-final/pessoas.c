@@ -41,10 +41,7 @@ typedef struct Total_Sexo
 // Verifica se eh fevereiro de um ano bissexto
 int fevAnoBissexto(int ano, int mes)
 {
-    int bissexto = 0;
-    if ((!(ano % 100) && !(ano % 400) && mes == 2) || (!(ano % 4) && mes == 2))
-        bissexto = 1;
-    return bissexto;
+    return ((!(ano % 100) && !(ano % 400) && mes == 2) || (!(ano % 4) && mes == 2));
 }
 
 int idade(Data Data_Nascimento)
