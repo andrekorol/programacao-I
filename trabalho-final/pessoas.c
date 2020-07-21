@@ -163,13 +163,6 @@ SexoMaiorIdade calculo_maior_idade(Pessoa pessoas[], int n)
     int indicesHomens[n];
     int indicesMulheres[n];
 
-    // Inicializa os vetores dos indices com o valor de -1 (indice invalido)
-    for (i = 0; i < n; i++)
-    {
-        indicesHomens[i] = -1;
-        indicesMulheres[i] = -1;
-    }
-
     for (i = 0; i < n; i++)
     {
         if (toupper(pessoas[i].sexo[0]) == 'M' && pessoas[i].idade >= 25)
