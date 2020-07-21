@@ -103,6 +103,15 @@ int idade(Data Data_Nascimento)
     return ano;
 }
 
+// Compara structs Pessoa pelo campo idade
+int comparaPessoa(const void *s1, const void *s2)
+{
+    Pessoa *p1 = (Pessoa *)s1;
+    Pessoa *p2 = (Pessoa *)s2;
+
+    return p1->idade - p2->idade;
+}
+
 int Inteiro_String(char texto[], int numero_Maximo)
 {
     printf(texto);
@@ -180,6 +189,11 @@ int main()
 
         pessoas[i].idade = idade(pessoas[i].Data_Nascimento);
     }
+
+    // Ordena as pessoas por idade
+    qsort(pessoas, n, sizeof(Pessoa), comparaPessoa);
+
+    // Imprime o relatorio
     Imprimir_Pessoas(pessoas, n);
 
     Total_Sexo Total_Sexo = calculo_sexo(pessoas, n);
