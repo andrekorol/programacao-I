@@ -110,7 +110,7 @@ int Inteiro_String(char texto[], int numero_Maximo)
 {
     printf(texto);
     char Caractere[numero_Maximo];
-    gets(Caractere);
+    fgets(Caractere, numero_Maximo, stdin);
 
     return atoi(Caractere);
 }
@@ -163,7 +163,7 @@ int main()
 {
     char numero[10];
     printf("Entre a quantidade (n) de pessoas: ");
-    gets(numero);
+    fgets(numero, 10, stdin);
     int n = atoi(numero);
 
     Pessoa pessoas[n];
@@ -171,10 +171,10 @@ int main()
     for (int i = 0; i < n; i++)
     {
         printf("\nDigite o nome: ");
-        gets(pessoas[i].nome);
+        fgets(pessoas[i].nome, 45, stdin);
 
         printf("Digite o sexo (M - para masculino e F - para feminino): ");
-        gets(pessoas[i].sexo);
+        fgets(pessoas[i].sexo, 1, stdin);
 
         printf("Digite a data de nascimento\n");
         pessoas[i].Data_Nascimento.dia = Inteiro_String("Dia: ", 2);
